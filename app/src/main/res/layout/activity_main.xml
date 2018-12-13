@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="#e6d185">
+        <Button
+            android:id="@+id/bt_stop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="暂停动画"/>
+        <Button
+            android:id="@+id/bt_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="开始动画"/>
+        <Button
+            android:id="@+id/bt_show_path"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="是否显示小球轨迹"/>
+        <Button
+            android:id="@+id/bt_add_ball"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="加一个小球"/>
+    </LinearLayout>
+
+    <com.example.zhouxf.collideball.view.DrawView
+        android:id="@+id/drawView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#a3daf4"/>
+
+</LinearLayout>
