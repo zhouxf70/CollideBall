@@ -1,4 +1,4 @@
-package com.example.zhouxf.collideball;
+package com.example.zhouxf.collideball.bean;
 
 /**
  * 两点之间的最短距离：线段

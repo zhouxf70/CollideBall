@@ -1,5 +1,8 @@
-package com.example.zhouxf.collideball;
+package com.example.zhouxf.collideball.bean;
 
+/**
+ * 点
+ */
 public class Point extends CollidedObject {
 
     private float x;

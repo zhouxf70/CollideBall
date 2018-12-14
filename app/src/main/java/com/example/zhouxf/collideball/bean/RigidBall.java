@@ -1,6 +1,6 @@
-package com.example.zhouxf.collideball;
+package com.example.zhouxf.collideball.bean;
 
-import android.util.Log;
+import com.example.zhouxf.collideball.CollideEvent;
 
 import java.util.List;
 

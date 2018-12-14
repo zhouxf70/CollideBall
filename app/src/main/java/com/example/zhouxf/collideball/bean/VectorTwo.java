@@ -1,6 +1,4 @@
-package com.example.zhouxf.collideball;
-
-import android.util.Log;
+package com.example.zhouxf.collideball.bean;
 
 /**
  * 二维向量

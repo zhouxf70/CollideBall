@@ -1,5 +1,9 @@
 package com.example.zhouxf.collideball;
 
+import com.example.zhouxf.collideball.bean.LineSegment;
+import com.example.zhouxf.collideball.bean.Point;
+import com.example.zhouxf.collideball.bean.RigidBall;
+
 import java.util.ArrayList;
 import java.util.List;
 

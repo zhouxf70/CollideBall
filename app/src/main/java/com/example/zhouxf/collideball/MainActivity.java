@@ -1,11 +1,17 @@
 package com.example.zhouxf.collideball;
 
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
+import com.example.zhouxf.collideball.bean.LineSegment;
+import com.example.zhouxf.collideball.bean.PaintingBall;
+import com.example.zhouxf.collideball.bean.Point;
+import com.example.zhouxf.collideball.bean.RigidBall;
+import com.example.zhouxf.collideball.bean.VectorTwo;
 import com.example.zhouxf.collideball.view.DrawView;
 
 import java.util.ArrayList;
@@ -13,16 +19,11 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    /**
-     * 撞击次数
-     */
-    public final static int collideNum=30;
-    /**
-     * 是否显示小球轨迹
-     */
     public static boolean isShowPath=true;
 
-    public static List<LineSegment> lineList;
+    public static boolean isStopThread=true;
+
+    public static List<LineSegment> border;
 
     private DrawView drawView;
 
@@ -35,27 +36,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         createBorder();
 
 
-        List<RigidBall> ballList=new ArrayList<>();
-        List<Float> timeList=new ArrayList<>();
-        timeList.add((float) 0);
-        ballList.add(new RigidBall(0,15,new Point(30,30),new VectorTwo(70,52)));
+//        List<RigidBall> ballList=new ArrayList<>();
+//        List<Float> timeList=new ArrayList<>();
+//        timeList.add((float) 0);
+//        ballList.add(new RigidBall(0,15,new Point(30,30),new VectorTwo(70,52)));
+//
+//        CollideEvent event;
+//        for (int i=0;i<collideNum;i++){
+//            event=RigidBall.getMinTimeOfCollideLine(ballList.get(i),lineList);
+//            if (event.collideTime==0){
+//                Log.e("Main","没有相遇事件发生");
+//                break;
+//            }
+////            Log.e("Main","将要发生的相遇事件："+event.toString());
+////            times[i+1]=event.collideTime+times[i];
+//            timeList.add(event.collideTime+timeList.get(i));
+////            ball_1[i+1]=RigidBall.collideLine(ball_1[i],event);
+//            ballList.add(RigidBall.collideLine(ballList.get(i),event));
+//            Log.e("Main","碰撞的第"+i+"次，time="+timeList.get(i)+"，ball="+ballList.get(i).toString());
+//        }
 
-        CollideEvent event;
-        for (int i=0;i<collideNum;i++){
-            event=RigidBall.getMinTimeOfCollideLine(ballList.get(i),lineList);
-            if (event.collideTime==0){
-                Log.e("Main","没有相遇事件发生");
-                break;
-            }
-//            Log.e("Main","将要发生的相遇事件："+event.toString());
-//            times[i+1]=event.collideTime+times[i];
-            timeList.add(event.collideTime+timeList.get(i));
-//            ball_1[i+1]=RigidBall.collideLine(ball_1[i],event);
-            ballList.add(RigidBall.collideLine(ballList.get(i),event));
-            Log.e("Main","碰撞的第"+i+"次，time="+timeList.get(i)+"，ball="+ballList.get(i).toString());
-        }
-
-        drawView.drawBallPath(ballList,timeList);
+//        drawView.drawBallPath(ballList,timeList);
     }
 
     private void initView(){
@@ -76,8 +77,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.bt_stop:
+                drawView.isCounting =false;
                 break;
             case R.id.bt_start:
+                if (drawView.ballList.isEmpty()){
+                    Toast.makeText(this,"添加至少一个小球",Toast.LENGTH_SHORT).show();
+                }
+                else if(!drawView.isCounting) drawView.startAnimation();
                 break;
             case R.id.bt_show_path:
                 isShowPath=!isShowPath;
@@ -138,6 +144,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * 向drawView内添加一个RigidBall
      */
     private void createBall(){
+        RigidBall ball=new RigidBall(0,15,new Point(30,30),new VectorTwo(70,52));
+        drawView.addBall(new PaintingBall(ball, Color.BLUE));
+    }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        isStopThread=true;
     }
 }
